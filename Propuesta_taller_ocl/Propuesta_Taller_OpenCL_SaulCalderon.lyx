@@ -1,0 +1,454 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize letterpaper
+\use_geometry true
+\use_amsmath 0
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 3cm
+\rightmargin 2cm
+\bottommargin 4cm
+\headheight 2cm
+\headsep 2cm
+\footskip 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Propuesta de taller 
+\begin_inset Quotes eld
+\end_inset
+
+Introducción a la Programación paralela de GPU’s con CUDA y OpenCL
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Saúl Calderón, Bach.
+ en Computación e Informática, investigador en el CITIC(Centro de Investigación
+ en Tecnologias de la Información y Comunicación), Universidad de Costa
+ Rica, estudiante de la Maestría en Ing.
+ Eléctrica con énfasis en sistemas digitales.
+ Correo: saul.calderonramirez@ucr.ac.cr
+\end_layout
+
+\begin_layout Section*
+Antecedentes y Justificación
+\end_layout
+
+\begin_layout Standard
+Cada día es más común la necesidad de procesar grandes cantidades de datos
+ en menor tiempo en muchas de las áreas en la ciencia.
+ Tomando en cuenta lo anterior, la computación de alto rendimiento se puede
+ definir entonces como la disciplina que suple de soluciones tanto en infraestru
+ctura como en entornos de programación a los científicos de las múltiples
+ disciplinas con tales necesidades.
+ Observando a grandes rasgos el desarrollo de la computación de alto rendimiento
+, puede decirse que sigue los pasos de la computación de consumo masivo
+ de escritorio, la cual, a sus inicios contaba con un puñado de fabricantes
+ que desarrollaban software y soluciones compatibles solo con sus plataformas,
+ siendo incompatibles con el resto de plataformas existentes el mercado.
+ El programador debía desarrollar soluciones para cada plataforma específica,
+ incrementando considerablemente el trabajo necesario.
+ Hoy en la computación de escritorio existen multiples entornos de desarrollo
+ x86, compiladores multi-plataforma, y máquinas virtuales como Java, las
+ cuales permiten desarrollar soluciones multi-plataforma.
+ La computación de alto rendimiento, basada actualmente en el paradigma
+ de programación paralela con múltiples unidades de procesamiento como infraestr
+uctura, ofrece a los desarrolladores múltiples plataformas y dispositivos
+ capaces de soportar procesamiento paralelo, como por ejemplo procesadores
+ multinúcleo, servidores multi-procesador, procesadores gráficos (GPU's)
+ y procesadores de uso específico(DSP's, PPU's, etc).
+ Dada la variada oferta de plataformas, han surgido estándares de programación
+ paralela como MPI (Message passing protocol), OpenMP, entre otros.
+ Sin embargo, el auge de procesadores auxiliares (GPU's, DSP's, PPU's) ha
+ provocado un uso frecuente de plataformas heterogéneas, con nodos de procesamie
+nto compuestos múltiples procesadores auxiliares y varios CPU multi-núcleo.
+ OpenCL (Open Computing Language), es un marco de trabajo que permite desarrolla
+r soluciones para múltiples plataformas, y también plataformas heterogéneas.
+ Su importancia gana terreno en la computación científica de alto rendimiento,
+ pues OpenCL permite explotar de una manera más simple los recursos de infraestr
+uctura disponibles.
+ El presente taller propuesto pretende introducir a académicos y estudiantes
+ en la programación de OpenCL, en primer instancia introduciendo conceptos
+ de la programación de GPU's utilizando CUDA, en los cuales se basa el modelo
+ de plataforma de OpenCL, para luego introducir la estructura general de
+ OpenCL y las funciones básicas necesarias para construír un programa en
+ este marco de trabajo.
+ El taller propuesto mostrará los detalles técnicos básicos para desarrollar
+ una aplicación en OpenCL, pero dada la variedad de plataformas y procedimientos
+ dependientes de ello para instalar OpenCL, no se requerirá del público
+ desarrollar el ejemplo expuesto en este taller.
+ Sin embargo estará a disposición el material expuesto en el taller, incluído
+ el código fuente de los ejemplos, para el uso del público del taller.
+ El taller propuesto ya fue expuesto en el PRIS-Seminar, el 14 de Junio
+ del presente año en el mini auditorio de la escuela de Ingeniería Eléctrica,
+ de la Universidad de Costa Rica, por Saúl Calderón.
+\end_layout
+
+\begin_layout Section*
+Objetivos General y Específicos
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Objetivo general
+\series default
+: Presentar a la audiencia la motivación en el desarrollo del marco de trabajo
+ OpenCL, su modelo de plataforma y las funciones básicas necesarias para
+ construír una aplicación paralelizada en OpenCL.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Objetivos específicos:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Definir la motivación detrás de OpenCL: 
+\series default
+Explorar las distintas plataformas en infraestructura comunes para el procesamie
+nto paralelo (GPU's, CPU's), sus diferencias básicas en cuanto a arquitectura
+ además de las características básicas del entorno de programación CUDA,
+ como preludio a la definición de la necesidad de un marco de trabajo como
+ OpenCL.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Explorar el modelo de plataforma y ejecución de OpenCL: 
+\series default
+Explorar y discutir las distintas características del modelo de plataforma
+ (entorno de programación) y del modelo de ejecución (entorno de ejecución
+ de OpenCL).
+ Explicar a grandes rasgos las funciones básicas para construir una aplicación
+ en el marco de trabajo OpenCL.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Discutir las conclusiones de la presentación y las oportunidades con OpenCL:
+ 
+\series default
+Exponer algunos consejos generales para la programación en OpenCL y comparar
+ su rendimiento con otras plataformas similares como CUDA.
+ Exponer y discutir las tendencias en la programación de alto rendimiento.
+\end_layout
+
+\begin_layout Section*
+Audiencia esperada
+\end_layout
+
+\begin_layout Standard
+La presentación desarrolla algunos conceptos básicos en la computación paralela
+ para luego exponer el marco de trabajo OpenCL, sin embargo aunque poca
+ experiencia en programación paralela es necesaria, si es recomendable que
+ el público maneje conceptos básicos en programación.
+ Es por esto que la audiencia objetivo se puede definir como estudiantes,
+ académicos y profesionales de Computación, Ingeniería eléctrica y áreas
+ afines, además de que científicos de otras áreas con experiencia en computación
+ paralela pueden obtener provecho de la charla.
+\end_layout
+
+\begin_layout Section*
+Cupo máximo
+\end_layout
+
+\begin_layout Standard
+Dado que no es necesario disponer del equipo para desarrollar ejemplos de
+ programación, el cupo máximo puede estar definido por la capacidad física
+ del salón en el que se desarrollará la charla.
+\end_layout
+
+\begin_layout Section*
+Calendario propuesto
+\end_layout
+
+\begin_layout Standard
+El taller tiene como objetivo desarrollarse en 2 horas, tiempo en el que
+ se realizó en el PRIS-Seminar.
+ Según los objetivos específicos enumerados anteriormente, el desglose de
+ tiempo para cada uno se enlista a continuación.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="4cm">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Sección
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Temas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Tiempo/minutos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Motivación detrás de OpenCL, introducción a CUDA y plataformas heterogéneas.
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Modelo de plataforma de OpenCL y comparación con CUDA.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Modelo de ejecución de OpenCL.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Modelo de memoria y programación en OpenCL.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Consejos generales para la programación de OpenCL, comparación con otras
+ tecnologías y discusión de las tendencias en la programación paralela.
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Requerimientos técnicos y audiovisuales
+\end_layout
+
+\begin_layout Standard
+No es necesaria la ejecución de ejemplos para este taller, por lo que como
+ requisitos es necesario contar con proyector y un computador para ejecutar
+ la presentación.
+ Será opcional equipo con OpenCL instalado, sin embargo es prescindible.
+\end_layout
+
+\end_body
+\end_document
